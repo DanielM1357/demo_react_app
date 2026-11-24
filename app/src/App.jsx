@@ -14,16 +14,17 @@ class App extends React.Component {
   render() {
     return (
         <div>
-            <h1>Two Counter, Two States Example</h1>
+            {/*<h1>Two Counter, Two States Example</h1>
             <Counter></Counter>
             <Counter></Counter>
 
             <br></br>
-            
+
             <h1>Shared Counter State Example</h1>
-            <SharedCounter></SharedCounter>
+            <SharedCounter></SharedCounter>*/}
 
             <h1>Fetch HTTP REST API Example</h1>
+
             <UserList></UserList>
                     
         </div>

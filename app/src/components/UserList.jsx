@@ -1,4 +1,6 @@
 import React from 'react';
+import axios from "axios";
+
 
 class UserList extends React.Component {
   constructor(props) {
@@ -10,21 +12,57 @@ class UserList extends React.Component {
     };
   }
 
-  componentDidMount() {
-    fetch('http://localhost:3000/api/users/')
-      .then(response => {
-        if (!response.ok) {
-          throw new Error(`HTTP error! Status: ${response.status}`);
-        }
-        return response.json();
-      })
-      .then(data => {
-        this.setState({ users: data, isLoading: false });
-      })
-      .catch(error => {
-        this.setState({ error: error.message, isLoading: false });
-      });
-  }
+//   componentDidMount() {
+//     fetch('http://localhost:3000/api/users/')
+//       .then(response => {
+//         if (!response.ok) {
+//           throw new Error(`HTTP error! Status: ${response.status}`);
+//         }
+//         return response.json();
+//       })
+//       .then(data => {
+//         this.setState({ users: data, isLoading: false });
+//       })
+//       .catch(error => {
+//         this.setState({ error: error.message, isLoading: false });
+//       });
+//   }
+
+//   componentDidMount() {
+//     axios.get('http://localhost:3000/api/users/')
+//       .then(response => {
+//         this.setState(
+//           {users: response.data, isLoading: false}
+//         );
+//         console.log(response.data);
+//       })
+//       .catch(error => {
+//         this.setState(
+//         { isLoading: false, error: error.message }
+//         );
+//         console.error(error.message);
+//       });
+//   }
+
+    componentDidMount() {
+      this.fetchData();
+    }
+
+    fetchData = async () => {
+      try {
+        const response = await axios.get(
+          'http://localhost:3000/api/users/'
+        );
+        this.setState(
+          { isLoading: false, users: response.data }
+        );
+      }
+      catch(error) {
+        this.setState(
+          { error: error.message, isLoading: false}
+        );
+      }
+    };
 
   render() {
     const { users, isLoading, error } = this.state;
